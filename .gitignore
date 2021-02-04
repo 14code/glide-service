@@ -3,3 +3,4 @@ composer.phar
 /.idea/
 /data/glide/cache/*
 /data/glide/source/*
+/.phpunit.result.cache

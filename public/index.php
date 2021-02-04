@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use I4code\GlideService\Glide\Manipulators\PixelArea;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use League\Glide\Filesystem\FileNotFoundException;
 use League\Glide\Responses\PsrResponseFactory;
@@ -29,6 +30,10 @@ $server = ServerFactory::create([
     'cache_path_prefix' => $config->cache,
     'driver' => 'imagick'
 ]);
+
+$manipulators = $server->getApi()->getManipulators();
+array_unshift($manipulators, new PixelArea());
+$server->getApi()->setManipulators($manipulators);
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $params = $_GET;
